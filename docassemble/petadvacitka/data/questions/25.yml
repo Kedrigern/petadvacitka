@@ -1,0 +1,308 @@
+---
+metadata:
+  title: Pětadvactíka
+  short title: Pětadvactíka
+  documentation: "None"
+  description: Pomoc živnostníkům Pětadvactíka v souvislosti s COVID-19
+  authors:
+    - name: Ondřej Profant
+      organization: Pirátská strana
+    - name: Jan Suchánek
+      organization: Pirátská strana
+    - name: Bára Soukupová
+      organization: Pirátská strana
+  revision_date: 2020-04-10  
+---
+features:
+  navigation: True
+  progress bar: True
+---
+sections:
+  - Úvod
+  - Otázky
+  - Kontrola
+---
+question: Závěrečná kontrola
+section: Kontrola
+progress: 95
+subquestion: |
+  #### Základní údaje o OSVČ
+  
+  IČO ${ ico } , DIČ ${ dic }
+  
+  ${ name }, narozen ${ birth }  
+  ${ address }
+  
+  Číslo účtu: ${ bank_account } / ${ bank_code } vedený u ${bank_name}
+  
+  Kontatkní email: ${ email }
+  Kontatkní telefon: ${ phone }
+  
+  Vedem u Finačního úřadu ${ fu_kraj }, územní pracoviště ${ fu_up }.
+  
+  #### Pomoc v programu pětadvacítka
+  
+  % if full:
+  Za celé období od 12. 3. do 30. 4. (počet započítaných dní: ${days})
+  % else:
+  Období: ${ od } - ${ do } (počet započítaných dní: ${days})  
+  % endif
+  
+  Příspěvěk: **${ amount }** Kč 
+    
+mandatory: True
+attachment:
+  name: Zadost
+  filename: zadost
+  docx template file: 25-template.docx
+  valid formats:
+    - pdf
+    - docx
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+question: Pětadvacítka
+section: Úvod
+progress: 10
+subquestion: |
+  **Ideový návrh** zjednodušeného formuláře pro pětadvacítku. Jedná se o pomoc živnostníkům poškozeným pandemii COVID-19.
+  
+  Vytvořili: Ondřej Profant, Bára Soukupová, Jan Suchánek
+  
+  Kontaktní osoba: Bára Soukupová, `bara.soukupova@pirati.cz`
+  
+  Pusťme se do toho:
+fields:
+  - IČO: ico
+    datatype: string
+    minlength: 8
+    maxlength: 8
+    default: "01178253"
+    help: Pomocí IČ dohledáme zbylé údaje
+  - DIČ: dic
+    default: "25596641"
+    help: U OSVČ se obvykle jedná o Rodné číslo 
+	- Číslo účtu: bank_account
+    help: Bankovní spojení, kam budou zaslány peníze
+    default: 11-12345678
+  - Kód banky: bank_code
+	  code: |		
+			[
+			{"0100": "0100 Komerční banka, a.s. "},
+			{"0300": "0300 ČSOB, a.s. "},
+			{"0600": "0600 MONETA Money Bank, a.s. "},
+			{"0710": "0710 Česká národní banka "},
+			{"0800": "0800 Česká spořitelna, a.s. "},
+			{"2010": "2010 Fio banka, a.s. "},
+			{"2020": "2020 MUFG Bank (Europe) N.V. Prague Branch "},
+			{"2030": "2030 AKCENTA, spořitelní a úvěrní družstvo "},
+			{"2060": "2060 Citfin, spořitelní družstvo "},
+			{"2070": "2070 Moravský Peněžní Ústav – spořitelní družstvo "},
+			{"2100": "2100 Hypoteční banka, a.s. "},
+			{"2200": "2200 Peněžní dům, spořitelní družstvo "},
+			{"2220": "2220 Artesa, spořitelní družstvo "},
+			{"2240": "2240 Poštová banka, a.s., pobočka Česká republika "},
+			{"2250": "2250 Banka CREDITAS a.s. "},
+			{"2260": "2260 ANO spořitelní družstvo "},
+			{"2310": "2310 ZUNO BANK AG, organizační složka "},
+			{"2600": "2600 Citibank Europe plc, organizační složka "},
+			{"2700": "2700 UniCredit Bank Czech Republic and Slovakia, a.s. "},
+			{"3030": "3030 Air Bank a. s. "},
+			{"3050": "3050 BNP Paribas Personal Finance SA, odštěpný závod "},
+			{"3060": "3060 PKO BP S.A., Czech Branch "},
+			{"3500": "3500 ING Bank N.V. "},
+			{"4000": "4000 Expobank CZ a.s. "},
+			{"4300": "4300 Českomoravská záruční a rozvojová banka, a.s. "},
+			{"5500": "5500 Raiffeisenbank, a.s. "},
+			{"5800": "5800 J&T Banka, a.s. "},
+			{"6000": "6000 PPF banka a.s. "},
+			{"6100": "6100 Equa bank a. s. "},
+			{"6200": "6200 COMMERZBANK Aktiengesellschaft, pobočka Praha "},
+			{"6210": "6210 mBank S.A., organizační složka "},
+			{"6300": "6300 BNP Paribas Fortis SA/NV, pobočka Česká republika "},
+			{"6700": "6700 Všeobecná úverová banka a.s., pobočka Praha "},
+			{"6800": "6800 Sberbank CZ, a.s. "},
+			{"7910": "7910 Deutsche Bank A.G. Filiale Prag "},
+			{"7940": "7940 Waldviertler Sparkasse Bank AG "},
+			{"7950": "7950 Raiffeisen stavební spořitelna a.s. "},
+			{"7960": "7960 Českomoravská stavební spořitelna a. s. "},
+			{"7970": "7970 Wüstenrot - stavební spořitelna a.s. "},
+			{"7980": "7980 Wüstenrot hypoteční banka, a.s. "},
+			{"7990": "7990 Modrá pyramida stavební spořitelna, a.s. "},
+			{"8030": "8030 Raiffeisenbank im Stiftland Waldsassen eG pobočka Cheb, odštěpný závod "},
+			{"8040": "8040 Oberbank AG pobočka Česká republika "},
+			{"8060": "8060 Stavební spořitelna České spořitelny, a.s. "},
+			{"8090": "8090 Česká exportní banka, a.s. "},
+			{"8150": "8150 HSBC Bank plc - pobočka Praha "},
+			{"8200": "8200 PRIVAT BANK AG der Raiffeisenlandesbank Oberösterreich v České republice "},
+			{"8220": "8220 Payment Execution s.r.o. "},
+			{"8230": "8230 EEPAYS s. r. o. "},
+			{"8240": "8240 Družstevní záložna Kredit "},
+			{"8250": "8250 Bank of China (Hungary) Close Ltd. Prague branch, odštěpný závod "}
+			]
+---
+question: Vítejte ${ ico }
+section: Otázky
+progress: 50
+subquestion: Jsou tyto údaje správné?
+fields:
+  - Jméno: name
+    default: 
+      code: ic_name()
+  - Adresa: address
+    default:
+      code: ic_address()
+  - Narození: birth_date
+    datatype: date
+    default:
+      code: ic_birth()
+  - Finanční úřad: fu_kraj
+    default:
+      code: ic_fu()
+  - Pracoviště FÚ: fu_up
+    default:
+      code: ic_up()
+    help: "Územní pracoviště finančního úřadu, kde jste registrován"
+  - Kontaktní email: email
+    required: False
+  - Kontaktní telefon: phone
+    required: False
+validation code: |
+  if birth_date > as_datetime('1/1/2006'):
+    validation_error("Na živnostníka jste přiliš mladý.")
+need: 
+  - ico
+---
+question: V jakém období chcete pomoci?
+section: Otázky
+progress: 65
+subquestion: V jakém období vaše podnikání bylo postiženo v epidemii COVID19? 
+fields:
+  - "Za celé období 12. 3. až 30. 4. 2020": full
+    datatype: yesnoradio
+    default: True
+  - Od: date_from
+    datatype: date
+    default: 2020-03-12
+    required: False
+    hide if: full
+  - Do: date_to
+    hide if: full
+    datatype: date
+    default: 2020-04-30
+    required: False
+validation code: |
+  from docassemble.base.util import *
+  
+  obdobi = 'Můžete žádat pouze za období 12. 3. až 30. 4. 2020'
+  if not full:
+    if date_to > as_datetime('4/30/2020'):
+      validation_error(obdobi)  
+    if date_from < as_datetime('3/12/2020'):
+      validation_error(obdobi)  
+    if date_from >= date_to:
+      validation_error('Datum "od" musí být před datumem "do"')
+---
+code: |
+  import requests
+  url = "https://pirati.dev/"
+  payload = {'ico': ico}
+  try:
+    r = requests.get(url, verify=False, params=payload)
+    data = r.json()
+  except:
+    pass
+
+  city = data['city']
+  fu_email = data['email']
+  
+  def ic_name():
+    return data['name']
+  
+  def ic_address():
+    return data['address']
+    
+  def ic_birth():
+    return data['birth']
+  
+  def ic_fu():
+    return data['region_fu']
+      
+  def ic_up():
+    return data['city_fu']  
+---
+code: |
+  banks = {
+      "0100": "Komerční banka, a.s. ",
+	    "0300": "ČSOB, a.s. ",
+	    "0600": "MONETA Money Bank, a.s. ",
+	    "0710": "Česká národní banka ",
+	    "0800": "Česká spořitelna, a.s. ",
+	    "2010": "Fio banka, a.s. ",
+	    "2020": "MUFG Bank (Europe) N.V. Prague Branch ",
+	    "2030": "AKCENTA, spořitelní a úvěrní družstvo ",
+	    "2060": "Citfin, spořitelní družstvo ",
+	    "2070": "Moravský Peněžní Ústav – spořitelní družstvo ",
+	    "2100": "Hypoteční banka, a.s. ",
+	    "2200": "Peněžní dům, spořitelní družstvo ",
+	    "2220": "Artesa, spořitelní družstvo ",
+	    "2240": "Poštová banka, a.s., pobočka Česká republika ",
+	    "2250": "Banka CREDITAS a.s. ",
+	    "2260": "ANO spořitelní družstvo ",
+	    "2310": "ZUNO BANK AG, organizační složka ",
+	    "2600": "Citibank Europe plc, organizační složka ",
+	    "2700": "UniCredit Bank Czech Republic and Slovakia, a.s. ",
+	    "3030": "Air Bank a. s. ",
+	    "3050": "BNP Paribas Personal Finance SA, odštěpný závod ",
+	    "3060": "PKO BP S.A., Czech Branch ",
+	    "3500": "ING Bank N.V. ",
+	    "4000": "Expobank CZ a.s. ",
+	    "4300": "Českomoravská záruční a rozvojová banka, a.s. ",
+	    "5500": "Raiffeisenbank, a.s. ",
+	    "5800": "J&T Banka, a.s. ",
+	    "6000": "PPF banka a.s. ",
+	    "6100": "Equa bank a. s. ",
+	    "6200": "COMMERZBANK Aktiengesellschaft, pobočka Praha ",
+	    "6210": "mBank S.A., organizační složka ",
+	    "6300": "BNP Paribas Fortis SA/NV, pobočka Česká republika ",
+	    "6700": "Všeobecná úverová banka a.s., pobočka Praha ",
+	    "6800": "Sberbank CZ, a.s. ",
+	    "7910": "Deutsche Bank A.G. Filiale Prag ",
+	    "7940": "Waldviertler Sparkasse Bank AG ",
+	    "7950": "Raiffeisen stavební spořitelna a.s. ",
+	    "7960": "Českomoravská stavební spořitelna a. s. ",
+	    "7970": "Wüstenrot - stavební spořitelna a.s. ",
+	    "7980": "Wüstenrot hypoteční banka, a.s. ",
+	    "7990": "Modrá pyramida stavební spořitelna, a.s. ",
+	    "8030": "Raiffeisenbank im Stiftland Waldsassen eG pobočka Cheb, odštěpný závod ",
+	    "8040": "Oberbank AG pobočka Česká republika ",
+	    "8060": "Stavební spořitelna České spořitelny, a.s. ",
+	    "8090": "Česká exportní banka, a.s. ",
+	    "8150": "HSBC Bank plc - pobočka Praha ",
+	    "8200": "PRIVAT BANK AG der Raiffeisenlandesbank Oberösterreich v České republice ",
+	    "8220": "Payment Execution s.r.o. ",
+	    "8230": "EEPAYS s. r. o. ",
+	    "8240": "Družstevní záložna Kredit ",
+	    "8250": "Bank of China (Hungary) Close Ltd. Prague branch, odštěpný závod "}
+  bank_name = banks[bank_code]
+  birth = birth_date.strftime("%d. %m. %Y")
+  today = today().strftime("%d. %m. %Y")
+  
+  if full:
+    full = "x"
+    part = " "
+    od = "-"
+    do = "-"
+    days = 49
+    amount = 24500
+  else:  
+    date_diff = date_to-date_from
+    days = date_diff.days + 1 # stejný den = 1 
+    amount = 500*days
+    od = date_from.strftime("%d. %m. %Y")
+    do = date_to.strftime("%d. %m. %Y")
+    part = "x"
+    full = " "
+  
+  
